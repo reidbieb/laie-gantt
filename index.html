@@ -1051,24 +1051,30 @@ function render() {
     <div class="progress-track"><div class="progress-fill" style="width:${m.overallPct}%"></div></div>
   `;
 
-  // Deadline — projected opening = latest end date of incomplete Pre-Open tasks (+ delay days)
+  // Projected opening = latest end date of incomplete Pre-Open tasks (+ delay days)
   const today = new Date(); today.setHours(0,0,0,0);
   let projectedOpenMs = 0;
+  let allDoneMs = 0;
   allTasks.forEach(t => {
-    if ((t.priority || 'Pre-Open') === 'Pre-Open' && t.status !== 'Complete' && t.end) {
+    if (t.status !== 'Complete' && t.end) {
       const endMs = new Date(t.end + 'T00:00:00').getTime() + (t.delayDays || 0) * 24 * 60 * 60 * 1000;
-      if (endMs > projectedOpenMs) projectedOpenMs = endMs;
+      if ((t.priority || 'Pre-Open') === 'Pre-Open' && endMs > projectedOpenMs) projectedOpenMs = endMs;
+      if (endMs > allDoneMs) allDoneMs = endMs;
     }
   });
-  const projectedDate = projectedOpenMs ? new Date(projectedOpenMs) : new Date(DATA.project.baselineCompletion + 'T00:00:00');
-  const daysLeft = Math.ceil((projectedDate - today) / (24 * 60 * 60 * 1000));
+  const projectedDate = projectedOpenMs ? new Date(projectedOpenMs) : today;
+  const allDoneDate = allDoneMs ? new Date(allDoneMs) : today;
+  const daysToOpen = Math.ceil((projectedDate - today) / (24 * 60 * 60 * 1000));
   const preOpenTotal = allTasks.filter(t => (t.priority || 'Pre-Open') === 'Pre-Open').length;
   const preOpenDone = allTasks.filter(t => (t.priority || 'Pre-Open') === 'Pre-Open' && t.status === 'Complete').length;
+  const postOpenTotal = allTasks.filter(t => t.priority === 'Post-Open').length;
+  const postOpenDone = allTasks.filter(t => t.priority === 'Post-Open' && t.status === 'Complete').length;
   document.getElementById('deadlineBar').innerHTML = `
-    <div class="label-val">Baseline <strong>${fmtDate(DATA.project.baselineCompletion)}</strong></div>
     <div class="label-val">Projected Opening <strong>${fmtDate(projectedDate.toISOString().split('T')[0])}</strong></div>
-    <div class="label-val">Days to Open <strong>${daysLeft}</strong></div>
+    <div class="label-val">Days to Open <strong>${daysToOpen}</strong></div>
     <div class="label-val">Pre-Open Tasks <strong>${preOpenDone} / ${preOpenTotal}</strong></div>
+    <div class="label-val">All Tasks Done <strong>${fmtDate(allDoneDate.toISOString().split('T')[0])}</strong></div>
+    <div class="label-val">Post-Open Tasks <strong>${postOpenDone} / ${postOpenTotal}</strong></div>
   `;
 
   // Teams filter + grid
