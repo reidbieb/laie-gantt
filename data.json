@@ -319,9 +319,9 @@
         {
           "task": "Install bridge (Turley)",
           "team": "Turley",
-          "start": "2026-04-01",
-          "end": "2026-05-13",
-          "days": 42,
+          "start": "2026-05-01",
+          "end": "2026-05-20",
+          "days": 19,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
