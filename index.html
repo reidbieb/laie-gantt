@@ -292,14 +292,41 @@
   .status-weather-hold { background: rgba(135,160,163,0.2); color: var(--day-blue); }
   .status-pending { background: rgba(138,133,120,0.1); color: var(--text-dim); }
 
+  /* Priority badge */
+  .priority-badge {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 3px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+  .priority-pre-open { background: rgba(226,171,35,0.12); color: var(--gold); }
+  .priority-post-open { background: rgba(135,160,163,0.15); color: var(--day-blue); }
+
   /* Gantt bar cell */
   .bar-cell { position: relative; min-width: 350px; }
-  .bar-track { position: relative; height: 18px; border-radius: 3px; }
+  .bar-track { position: relative; height: 18px; border-radius: 3px; cursor: crosshair; }
   .bar {
     position: absolute;
     height: 100%;
     border-radius: 3px;
     min-width: 4px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .bar-days {
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--cream);
+    padding: 0 4px;
+    white-space: nowrap;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    position: relative;
+    z-index: 1;
   }
   .bar-pending { background: rgba(138,133,120,0.25); border: 1px solid var(--text-dim); }
   .bar-in-progress { background: rgba(226,171,35,0.35); border: 1px solid var(--gold); }
@@ -313,17 +340,40 @@
     background: rgba(107,158,58,0.5);
   }
 
+  /* Today line — no label on rows, only in header */
   .today-line {
     position: absolute; top: -2px; bottom: -2px; width: 2px;
     background: var(--red); z-index: 2;
   }
-  .today-line::after {
+  .today-label {
+    position: absolute; top: 0; bottom: 0; width: 2px;
+    background: var(--red); z-index: 2;
+  }
+  .today-label::after {
     content: 'TODAY';
-    position: absolute; top: -14px; left: -16px;
+    position: absolute; bottom: -12px; left: -16px;
     font-size: 0.5rem; color: var(--red); font-weight: 800; letter-spacing: 1px;
   }
 
-  .week-labels { display: flex; font-size: 0.58rem; color: var(--text-dim); margin-bottom: 2px; }
+  /* Week hover tooltip */
+  .week-hover-tip {
+    position: fixed;
+    padding: 4px 10px;
+    background: var(--surface);
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--gold);
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+  }
+  .week-hover-tip.visible { opacity: 1; }
+
+  .week-labels { display: flex; font-size: 0.58rem; color: var(--text-dim); margin-bottom: 2px; position: relative; }
   .week-labels span { text-align: center; border-right: 1px solid var(--border); }
 
   .note-text {
@@ -341,6 +391,13 @@
     font-family: 'Syne', sans-serif;
     background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
     padding: 6px 10px; color: var(--text); font-size: 0.8rem; outline: none; transition: border-color 0.15s;
+    -webkit-appearance: none; appearance: none;
+  }
+  .filter-bar select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a8578'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 24px;
   }
   .filter-bar select:focus, .filter-bar input:focus { border-color: var(--gold); }
 
@@ -367,7 +424,15 @@
   .edit-input:focus, .edit-select:focus { border-color: var(--gold); }
   .edit-input[type="number"] { width: 55px; text-align: center; }
   .edit-input[type="date"] { width: 120px; }
-  .edit-select { cursor: pointer; }
+  .edit-select {
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a8578'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 6px center;
+    padding-right: 20px;
+  }
 
   .add-task-row {
     padding: 8px 16px;
@@ -584,6 +649,11 @@
       <option value="Delayed">Delayed</option>
       <option value="Weather Hold">Weather Hold</option>
     </select>
+    <select id="priorityFilter">
+      <option value="">All Priority</option>
+      <option value="Pre-Open">Pre-Open</option>
+      <option value="Post-Open">Post-Open</option>
+    </select>
   </div>
 
   <div class="team-grid" id="teamGrid"></div>
@@ -619,6 +689,9 @@
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
+
+<!-- Week hover tooltip -->
+<div class="week-hover-tip" id="weekHoverTip"></div>
 
 <script>
 let DATA = null;
@@ -701,6 +774,20 @@ function getWeeks(range) {
   return weeks;
 }
 
+// ---- Working days calc ----
+
+function addWorkingDays(startStr, workDays) {
+  if (!startStr || !workDays) return startStr;
+  const d = new Date(startStr + 'T00:00:00');
+  let remaining = Math.ceil(workDays);
+  while (remaining > 0) {
+    d.setDate(d.getDate() + 1);
+    const dow = d.getDay();
+    if (dow !== 0 && dow !== 6) remaining--;
+  }
+  return d.toISOString().split('T')[0];
+}
+
 // ---- Edit mode ----
 
 function toggleEditMode() {
@@ -758,24 +845,20 @@ function readEditsFromDOM() {
     rows.forEach(row => {
       const inputs = row.querySelectorAll('.edit-input, .edit-select');
       if (inputs.length === 0) return;
+      const startVal = inputs[2].value || null;
+      const daysVal = parseFloat(inputs[3].value) || 0;
       newTasks.push({
         task: inputs[0].value,
         team: inputs[1].value,
-        start: inputs[2].value || null,
-        end: inputs[3].value || null,
-        days: 0,
+        start: startVal,
+        end: startVal && daysVal > 0 ? addWorkingDays(startVal, daysVal) : startVal,
+        days: daysVal,
         status: inputs[4].value,
-        delayDays: parseFloat(inputs[5].value) || 0,
-        pctDone: parseFloat(inputs[6].value) || 0,
-        notes: inputs[7].value
+        priority: inputs[5].value,
+        delayDays: parseFloat(inputs[6].value) || 0,
+        pctDone: parseFloat(inputs[7].value) || 0,
+        notes: inputs[8].value
       });
-    });
-    // Recalc days
-    newTasks.forEach(t => {
-      if (t.start && t.end) {
-        const diff = (new Date(t.end + 'T00:00:00') - new Date(t.start + 'T00:00:00')) / (1000 * 60 * 60 * 24);
-        t.days = Math.max(0, diff);
-      }
     });
     section.tasks = newTasks;
   });
@@ -790,8 +873,9 @@ function addTask(sectionIdx) {
     team: getTeams()[0] || '',
     start: today,
     end: today,
-    days: 0,
+    days: 1,
     status: 'Pending',
+    priority: 'Pre-Open',
     delayDays: 0,
     pctDone: 0,
     notes: ''
@@ -922,6 +1006,7 @@ function render() {
   const m = computeMetrics(allTasks);
   const teamFilter = EDITING ? '' : document.getElementById('teamFilter').value;
   const statusFilter = EDITING ? '' : document.getElementById('statusFilter').value;
+  const priorityFilter = EDITING ? '' : document.getElementById('priorityFilter').value;
 
   // Subtitle
   document.getElementById('subtitle').innerHTML =
@@ -947,15 +1032,24 @@ function render() {
     <div class="progress-track"><div class="progress-fill" style="width:${m.overallPct}%"></div></div>
   `;
 
-  // Deadline
-  const baseEnd = new Date(DATA.project.baselineCompletion + 'T00:00:00');
-  const revisedEnd = new Date(baseEnd.getTime() + m.totalDelayDays * 24 * 60 * 60 * 1000);
+  // Deadline — projected opening = latest end date of incomplete Pre-Open tasks (+ delay days)
   const today = new Date(); today.setHours(0,0,0,0);
-  const daysLeft = Math.ceil((revisedEnd - today) / (24 * 60 * 60 * 1000));
+  let projectedOpenMs = 0;
+  allTasks.forEach(t => {
+    if ((t.priority || 'Pre-Open') === 'Pre-Open' && t.status !== 'Complete' && t.end) {
+      const endMs = new Date(t.end + 'T00:00:00').getTime() + (t.delayDays || 0) * 24 * 60 * 60 * 1000;
+      if (endMs > projectedOpenMs) projectedOpenMs = endMs;
+    }
+  });
+  const projectedDate = projectedOpenMs ? new Date(projectedOpenMs) : new Date(DATA.project.baselineCompletion + 'T00:00:00');
+  const daysLeft = Math.ceil((projectedDate - today) / (24 * 60 * 60 * 1000));
+  const preOpenTotal = allTasks.filter(t => (t.priority || 'Pre-Open') === 'Pre-Open').length;
+  const preOpenDone = allTasks.filter(t => (t.priority || 'Pre-Open') === 'Pre-Open' && t.status === 'Complete').length;
   document.getElementById('deadlineBar').innerHTML = `
     <div class="label-val">Baseline <strong>${fmtDate(DATA.project.baselineCompletion)}</strong></div>
-    <div class="label-val">Revised <strong>${fmtDate(revisedEnd.toISOString().split('T')[0])}</strong></div>
-    <div class="label-val">Days Remaining <strong>${daysLeft}</strong></div>
+    <div class="label-val">Projected Opening <strong>${fmtDate(projectedDate.toISOString().split('T')[0])}</strong></div>
+    <div class="label-val">Days to Open <strong>${daysLeft}</strong></div>
+    <div class="label-val">Pre-Open Tasks <strong>${preOpenDone} / ${preOpenTotal}</strong></div>
   `;
 
   // Teams filter + grid
@@ -999,7 +1093,8 @@ function render() {
     if (!EDITING) {
       if (teamFilter) tasks = tasks.filter(t => t.team === teamFilter);
       if (statusFilter) tasks = tasks.filter(t => t.status === statusFilter);
-      if (tasks.length === 0 && (teamFilter || statusFilter)) return '';
+      if (priorityFilter) tasks = tasks.filter(t => (t.priority || 'Pre-Open') === priorityFilter);
+      if (tasks.length === 0 && (teamFilter || statusFilter || priorityFilter)) return '';
     }
 
     const sectionComplete = tasks.filter(t => t.status === 'Complete').length;
@@ -1012,8 +1107,9 @@ function render() {
           <td><input class="edit-input" type="text" value="${(t.task||'').replace(/"/g,'&quot;')}" onchange="markChanged()"></td>
           <td><select class="edit-select" onchange="handleTeamChange(this)">${currentTeams.map(tm => `<option value="${tm}" ${t.team===tm?'selected':''}>${tm}</option>`).join('')}<option value="__new__">+ Add new...</option></select></td>
           <td><input class="edit-input" type="date" value="${t.start||''}" onchange="markChanged()"></td>
-          <td><input class="edit-input" type="date" value="${t.end||''}" onchange="markChanged()"></td>
+          <td><input class="edit-input" type="number" min="0" max="999" step="0.5" value="${t.days||0}" onchange="markChanged()" title="Working days (Mon-Fri)"></td>
           <td><select class="edit-select" onchange="markChanged()">${STATUSES.map(s => `<option value="${s}" ${t.status===s?'selected':''}>${s}</option>`).join('')}</select></td>
+          <td><select class="edit-select" onchange="markChanged()">${['Pre-Open','Post-Open'].map(p => `<option value="${p}" ${(t.priority||'Pre-Open')===p?'selected':''}>${p}</option>`).join('')}</select></td>
           <td><input class="edit-input" type="number" min="0" max="99" value="${t.delayDays||0}" onchange="markChanged()"></td>
           <td><input class="edit-input" type="number" min="0" max="100" value="${t.pctDone||0}" onchange="markChanged()"></td>
           <td><input class="edit-input" type="text" value="${(t.notes||'').replace(/"/g,'&quot;')}" onchange="markChanged()"></td>
@@ -1029,8 +1125,8 @@ function render() {
         <div class="gantt-table-wrap" id="section-${si}">
           <table class="gantt-table">
             <thead><tr>
-              <th>Task</th><th>Team</th><th>Start</th><th>End</th>
-              <th>Status</th><th class="col-delay">Delay</th><th>%</th><th>Notes</th><th></th>
+              <th>Task</th><th>Team</th><th>Start</th><th>Days</th>
+              <th>Status</th><th>Priority</th><th class="col-delay">Delay</th><th>%</th><th>Notes</th><th></th>
             </tr></thead>
             <tbody>${rows}</tbody>
           </table>
@@ -1054,13 +1150,17 @@ function render() {
           const leftPct = ((startMs - range.min) / totalMs) * 100;
           const widthPct = Math.max(0.5, ((endMs - startMs) / totalMs) * 100);
           const progressWidth = t.pctDone > 0 && t.pctDone < 100 ? `<div class="bar-progress" style="width:${t.pctDone}%"></div>` : '';
-          barHtml = `<div class="bar ${barClass(t.status)}" style="left:${leftPct}%;width:${widthPct}%">${progressWidth}</div>`;
+          const daysLabel = t.days ? `<span class="bar-days">${t.days}d</span>` : '';
+          barHtml = `<div class="bar ${barClass(t.status)}" style="left:${leftPct}%;width:${widthPct}%">${progressWidth}${daysLabel}</div>`;
         }
+        const pri = t.priority || 'Pre-Open';
+        const priClass = 'priority-' + pri.toLowerCase().replace(/\s+/g, '-');
         return `<tr>
           <td class="task-name">${t.task}</td>
           <td class="team-col">${t.team}</td>
-          <td class="dates-col">${fmtDate(t.start)} \u2013 ${fmtDate(t.end)}</td>
+          <td class="dates-col">${fmtDate(t.start)} \u2013 ${fmtDate(t.end)}<br><span style="color:var(--text-dim);font-size:0.68rem">${t.days || ''} ${t.days ? 'days' : ''}</span></td>
           <td><span class="status-badge ${statusClass(t.status)}">${t.status}</span></td>
+          <td><span class="priority-badge ${priClass}">${pri}</span></td>
           <td class="pct-col">${t.pctDone}%</td>
           <td class="bar-cell">
             <div class="bar-track">
@@ -1080,8 +1180,8 @@ function render() {
         <div class="gantt-table-wrap" id="section-${si}">
           <table class="gantt-table">
             <thead><tr>
-              <th>Task</th><th>Team</th><th>Dates</th><th>Status</th><th>%</th>
-              <th style="min-width:350px"><div class="week-labels">${weekHeaders}</div></th>
+              <th>Task</th><th>Team</th><th>Dates</th><th>Status</th><th>Priority</th><th>%</th>
+              <th style="min-width:350px"><div class="week-labels">${weekHeaders}${todayPct > 0 && todayPct < 100 ? `<div class="today-label" style="left:${todayPct}%"></div>` : ''}</div></th>
               <th>Notes</th>
             </tr></thead>
             <tbody>${rows}</tbody>
@@ -1093,6 +1193,34 @@ function render() {
 
   document.getElementById('lastUpdated').textContent =
     `Last refreshed: ${DATA.project.lastRefreshed} \u2014 Data loaded at ${new Date().toLocaleTimeString()}`;
+
+  // Attach week hover tooltip to bar tracks
+  if (!EDITING) {
+    const tip = document.getElementById('weekHoverTip');
+    document.querySelectorAll('.bar-track').forEach(track => {
+      track.addEventListener('mousemove', e => {
+        const rect = track.getBoundingClientRect();
+        const pct = (e.clientX - rect.left) / rect.width;
+        const hoverMs = range.min + pct * totalMs;
+        const hoverDate = new Date(hoverMs);
+        // Find Monday of that week
+        const day = hoverDate.getDay();
+        const diff = (day === 0 ? -6 : 1) - day;
+        const monday = new Date(hoverDate);
+        monday.setDate(monday.getDate() + diff);
+        const friday = new Date(monday);
+        friday.setDate(friday.getDate() + 4);
+        const fmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        tip.textContent = `Week of ${fmt(monday)} – ${fmt(friday)}`;
+        tip.style.left = (e.clientX + 12) + 'px';
+        tip.style.top = (e.clientY - 30) + 'px';
+        tip.classList.add('visible');
+      });
+      track.addEventListener('mouseleave', () => {
+        tip.classList.remove('visible');
+      });
+    });
+  }
 }
 
 function toggleSection(i) {
@@ -1105,6 +1233,7 @@ function toggleSection(i) {
 
 document.getElementById('teamFilter').addEventListener('change', render);
 document.getElementById('statusFilter').addEventListener('change', render);
+document.getElementById('priorityFilter').addEventListener('change', render);
 
 loadData();
 </script>

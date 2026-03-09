@@ -1,6 +1,6 @@
 {
   "project": {
-    "name": "Laie Project — Opening Readiness Tracker",
+    "name": "Laie Project \u2014 Opening Readiness Tracker",
     "plannedStart": "2026-03-09",
     "baselineCompletion": "2026-05-13",
     "lastRefreshed": "2026-03-09"
@@ -15,10 +15,11 @@
           "start": "2026-03-09",
           "end": "2026-03-10",
           "days": 1,
-          "status": "In Progress",
+          "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Alternative gate exit from PCC",
@@ -29,40 +30,44 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Repair pot holes - cane haul rd",
           "team": "CWBC Crew 1",
           "start": "2026-03-09",
           "end": "2026-03-10",
-          "days": 1,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Add guard rail - culvert crossings",
           "team": "CWBC Crew 1",
           "start": "2026-03-10",
           "end": "2026-03-11",
-          "days": 1,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Plant panics - lower dog farm",
           "team": "Roger",
           "start": "2026-03-09",
           "end": "2026-03-10",
-          "days": 1,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Plant panics - pink house",
@@ -73,7 +78,8 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Add gravel - farm bypass road",
@@ -84,29 +90,32 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Make pull out spots - north field",
           "team": "CWBC Crew 1",
           "start": "2026-03-12",
           "end": "2026-03-13",
-          "days": 1,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Decide parking layout (carts)",
           "team": "CWBC Crew 1",
           "start": "2026-03-13",
           "end": "2026-03-16",
-          "days": 3,
+          "days": 1,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         }
       ]
     },
@@ -122,7 +131,8 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Add mulch - food forest",
@@ -133,18 +143,20 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Moses - steps down to river",
           "team": "Moses",
           "start": "2026-03-09",
           "end": "2026-03-16",
-          "days": 7,
+          "days": 5,
           "status": "In Progress",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Add mulch to flume path",
@@ -155,7 +167,8 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Treenet Willy - both net sections",
@@ -166,29 +179,32 @@
           "status": "Complete",
           "delayDays": 0,
           "pctDone": 100,
-          "notes": "DONE"
+          "notes": "DONE",
+          "priority": "Pre-Open"
         },
         {
           "task": "Construct river bridge",
           "team": "CWBC Crew 1",
           "start": "2026-03-17",
           "end": "2026-03-24",
-          "days": 7,
+          "days": 5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Rope rapping plan",
           "team": "CWBC Crew 1",
           "start": "2026-03-24",
           "end": "2026-03-31",
-          "days": 7,
+          "days": 5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Gates installation",
@@ -199,7 +215,8 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Lop top off I-beams",
@@ -210,18 +227,20 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Add bamboo railing - river south wall",
           "team": "CWBC Crew 1",
           "start": "2026-04-03",
           "end": "2026-04-06",
-          "days": 3,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Add hand rail - ramp and stairs",
@@ -232,18 +251,20 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Plant Citronella plants",
           "team": "Roger",
           "start": "2026-03-13",
           "end": "2026-03-16",
-          "days": 3,
+          "days": 1,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Install Benches - food forest",
@@ -254,7 +275,8 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         }
       ]
     },
@@ -266,11 +288,12 @@
           "team": "CWBC Crew 1",
           "start": "2026-04-08",
           "end": "2026-04-15",
-          "days": 7,
+          "days": 5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Add guard rail to culvert",
@@ -281,7 +304,8 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Bypass pond/standing water area",
@@ -292,18 +316,20 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Add gravel - steep farm sections",
           "team": "CWBC Crew 1",
           "start": "2026-04-17",
           "end": "2026-04-20",
-          "days": 3,
+          "days": 1,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Meeting with farmers",
@@ -314,29 +340,32 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Install bridge (Turley)",
           "team": "Turley",
-          "start": "2026-05-01",
-          "end": "2026-05-20",
-          "days": 19,
+          "start": "2026-04-01",
+          "end": "2026-05-13",
+          "days": 30,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Spray/clear cane grass by gate",
           "team": "Roger",
           "start": "2026-03-16",
           "end": "2026-03-17",
-          "days": 1,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Stabilize/gravel - Wags truck area",
@@ -347,7 +376,8 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         }
       ]
     },
@@ -363,7 +393,8 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Chip all cut trees",
@@ -374,7 +405,8 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Chip the walking paths",
@@ -385,40 +417,44 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Add chips under boulder climbing",
           "team": "Roger",
           "start": "2026-03-18",
           "end": "2026-03-19",
-          "days": 1,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Add protective landscaping",
           "team": "Roger",
           "start": "2026-03-19",
           "end": "2026-03-20",
-          "days": 1,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Plant Ulu trees",
           "team": "Roger",
           "start": "2026-03-20",
           "end": "2026-03-23",
-          "days": 3,
+          "days": 1,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Tree nets installed - Mother Mango",
@@ -429,18 +465,20 @@
           "status": "Complete",
           "delayDays": 0,
           "pctDone": 100,
-          "notes": "DONE"
+          "notes": "DONE",
+          "priority": "Pre-Open"
         },
         {
           "task": "Install Benches - Mother Mango",
           "team": "CWBC Crew 1",
           "start": "2026-04-24",
           "end": "2026-04-27",
-          "days": 3,
+          "days": 1,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Add railing - high/exposed areas",
@@ -451,7 +489,8 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Improve scrabble hike - railings",
@@ -462,18 +501,20 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Define trails to tree nets",
           "team": "CWBC Crew 1",
           "start": "2026-05-01",
           "end": "2026-05-04",
-          "days": 3,
+          "days": 1,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         }
       ]
     },
@@ -485,33 +526,36 @@
           "team": "CWBC Crew 2",
           "start": "2026-03-09",
           "end": "2026-03-16",
-          "days": 7,
+          "days": 5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Add Guard rail - flume climb",
           "team": "CWBC Crew 2",
           "start": "2026-03-16",
           "end": "2026-03-17",
-          "days": 1,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Rework flume climb",
           "team": "CWBC Crew 2",
           "start": "2026-03-17",
           "end": "2026-03-18",
-          "days": 1,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Open Laie Falls cut and gravel",
@@ -522,18 +566,20 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Add gates - Laie falls crossing",
           "team": "CWBC Crew 2",
           "start": "2026-03-20",
           "end": "2026-03-23",
-          "days": 3,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Add gravel - Bowl rd",
@@ -544,51 +590,56 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Add Guard rail - Kevin cut",
           "team": "CWBC Crew 2",
           "start": "2026-03-24",
           "end": "2026-03-25",
-          "days": 1,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Open farm road after Kevin cut",
           "team": "CWBC Crew 2",
           "start": "2026-03-25",
           "end": "2026-03-26",
-          "days": 1,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Guard Rail - double barrel crossing",
           "team": "CWBC Crew 2",
           "start": "2026-03-26",
           "end": "2026-03-27",
-          "days": 1,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Guard rail - all culvert crossings",
           "team": "CWBC Crew 2",
           "start": "2026-03-27",
           "end": "2026-03-30",
-          "days": 3,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Remove Fence - upper sections",
@@ -599,29 +650,32 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Remove iron wood tree",
           "team": "CWBC Crew 2",
           "start": "2026-04-01",
           "end": "2026-04-02",
-          "days": 1,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "New Cut - track, gravel, guard rail",
           "team": "CWBC Crew 2",
           "start": "2026-04-02",
           "end": "2026-04-07",
-          "days": 5,
+          "days": 3,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Hydro seed upslope of new cut",
@@ -632,7 +686,8 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "New Parking area - compact & gravel",
@@ -643,18 +698,20 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Improve walking trail to bulldozer",
           "team": "CWBC Crew 2",
           "start": "2026-04-09",
           "end": "2026-04-13",
-          "days": 4,
+          "days": 2,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Define lower parking lot",
@@ -665,7 +722,8 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         }
       ]
     },
@@ -677,33 +735,36 @@
           "team": "Moses",
           "start": "2026-03-16",
           "end": "2026-04-13",
-          "days": 28,
+          "days": 20,
           "status": "In Progress",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Kevin - install the deck",
           "team": "Kevin",
           "start": "2026-03-09",
           "end": "2026-04-06",
-          "days": 28,
+          "days": 20,
           "status": "In Progress",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Roger - landscaping & planting",
           "team": "Roger",
           "start": "2026-03-23",
           "end": "2026-03-30",
-          "days": 7,
+          "days": 5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Source large koa tree",
@@ -714,29 +775,32 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Roger - water catchment system",
           "team": "Roger",
           "start": "2026-04-01",
           "end": "2026-04-06",
-          "days": 5,
+          "days": 3,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Cut small return hiking path",
           "team": "CWBC Crew 2",
           "start": "2026-04-14",
           "end": "2026-04-15",
-          "days": 1,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         }
       ]
     },
@@ -748,22 +812,24 @@
           "team": "CWBC Crew 2",
           "start": "2026-04-15",
           "end": "2026-04-22",
-          "days": 7,
+          "days": 5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Guard rail - small section",
           "team": "CWBC Crew 2",
           "start": "2026-04-22",
           "end": "2026-04-23",
-          "days": 1,
+          "days": 0.5,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Improve papaya farmer area",
@@ -774,7 +840,8 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         }
       ]
     },
@@ -786,11 +853,12 @@
           "team": "Kevin's Crew",
           "start": "2026-03-09",
           "end": "2026-03-27",
-          "days": 18,
+          "days": 14,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         }
       ]
     },
@@ -806,7 +874,8 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "BYU Easement",
@@ -817,18 +886,20 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "HRI Nursery area defined",
           "team": "Nick & Blaine",
           "start": "2026-03-13",
           "end": "2026-03-16",
-          "days": 3,
+          "days": 1,
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Farmer Meeting",
@@ -839,7 +910,8 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         },
         {
           "task": "Signage planning",
@@ -850,7 +922,8 @@
           "status": "Pending",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "",
+          "priority": "Pre-Open"
         }
       ]
     }
