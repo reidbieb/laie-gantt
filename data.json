@@ -15,8 +15,8 @@
           "start": "2026-03-09",
           "end": "2026-03-10",
           "days": 1,
-          "status": "In Progress",
-          "delayDays": 0,
+          "status": "Delayed",
+          "delayDays": 2,
           "pctDone": 0,
           "notes": ""
         },
