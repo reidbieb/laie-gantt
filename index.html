@@ -42,7 +42,7 @@
     line-height: 1.5;
     min-height: 100vh;
   }
-  .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+  .container { max-width: 1900px; margin: 0 auto; padding: 24px; }
 
   /* Header */
   .header {
@@ -246,7 +246,7 @@
     width: 100%;
     border-collapse: collapse;
     font-size: 0.8rem;
-    min-width: 900px;
+    min-width: 1200px;
   }
   .gantt-table th {
     background: var(--surface);
@@ -308,7 +308,7 @@
   .priority-post-open { background: rgba(135,160,163,0.15); color: var(--day-blue); }
 
   /* Gantt bar cell */
-  .bar-cell { position: relative; min-width: 350px; }
+  .bar-cell { position: relative; min-width: 450px; }
   .bar-track { position: relative; height: 18px; border-radius: 3px; cursor: crosshair; }
   .bar {
     position: absolute;
@@ -1205,7 +1205,7 @@ function render() {
           <table class="gantt-table">
             <thead><tr>
               <th>Task</th><th>Team</th><th>Dates</th><th>Status</th><th>Priority</th><th>%</th>
-              <th style="min-width:350px"><div class="week-labels">${weekHeaders}${todayPct > 0 && todayPct < 100 ? `<div class="today-label" style="left:${todayPct}%"></div>` : ''}</div></th>
+              <th style="min-width:450px"><div class="week-labels">${weekHeaders}${todayPct > 0 && todayPct < 100 ? `<div class="today-label" style="left:${todayPct}%"></div>` : ''}</div></th>
               <th>Notes</th>
             </tr></thead>
             <tbody>${rows}</tbody>
