@@ -34,6 +34,7 @@
     --pending-bg: #1e1e1e;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 18px; }
   body {
     font-family: 'Syne', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     background: var(--bg);
@@ -328,6 +329,24 @@
     position: relative;
     z-index: 1;
   }
+  .bar-days-outside {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-left: 5px;
+    color: var(--text-dim);
+    text-shadow: none;
+  }
+
+  /* Hover crosshair line across section */
+  .hover-line {
+    position: absolute; top: 0; bottom: 0; width: 1px;
+    background: rgba(226,171,35,0.25);
+    pointer-events: none;
+    z-index: 3;
+    display: none;
+  }
+  .hover-line.visible { display: block; }
   .bar-pending { background: rgba(138,133,120,0.25); border: 1px solid var(--text-dim); }
   .bar-in-progress { background: rgba(226,171,35,0.35); border: 1px solid var(--gold); }
   .bar-complete { background: rgba(107,158,58,0.35); border: 1px solid var(--green); }
@@ -1150,8 +1169,12 @@ function render() {
           const leftPct = ((startMs - range.min) / totalMs) * 100;
           const widthPct = Math.max(0.5, ((endMs - startMs) / totalMs) * 100);
           const progressWidth = t.pctDone > 0 && t.pctDone < 100 ? `<div class="bar-progress" style="width:${t.pctDone}%"></div>` : '';
-          const daysLabel = t.days ? `<span class="bar-days">${t.days}d</span>` : '';
-          barHtml = `<div class="bar ${barClass(t.status)}" style="left:${leftPct}%;width:${widthPct}%">${progressWidth}${daysLabel}</div>`;
+          if (widthPct < 3.5 && t.days) {
+            barHtml = `<div class="bar ${barClass(t.status)}" style="left:${leftPct}%;width:${widthPct}%">${progressWidth}</div><span class="bar-days bar-days-outside" style="left:${leftPct + widthPct}%">${t.days}d</span>`;
+          } else {
+            const daysLabel = t.days ? `<span class="bar-days">${t.days}d</span>` : '';
+            barHtml = `<div class="bar ${barClass(t.status)}" style="left:${leftPct}%;width:${widthPct}%">${progressWidth}${daysLabel}</div>`;
+          }
         }
         const pri = t.priority || 'Pre-Open';
         const priClass = 'priority-' + pri.toLowerCase().replace(/\s+/g, '-');
@@ -1163,9 +1186,10 @@ function render() {
           <td><span class="priority-badge ${priClass}">${pri}</span></td>
           <td class="pct-col">${t.pctDone}%</td>
           <td class="bar-cell">
-            <div class="bar-track">
+            <div class="bar-track" data-section="${si}">
               ${barHtml}
               ${todayPct > 0 && todayPct < 100 ? `<div class="today-line" style="left:${todayPct}%"></div>` : ''}
+              <div class="hover-line"></div>
             </div>
           </td>
           <td class="note-text" title="${(t.notes || '').replace(/"/g, '&quot;')}">${t.notes || ''}</td>
@@ -1194,13 +1218,14 @@ function render() {
   document.getElementById('lastUpdated').textContent =
     `Last refreshed: ${DATA.project.lastRefreshed} \u2014 Data loaded at ${new Date().toLocaleTimeString()}`;
 
-  // Attach week hover tooltip to bar tracks
+  // Attach week hover tooltip + vertical crosshair line to bar tracks
   if (!EDITING) {
     const tip = document.getElementById('weekHoverTip');
     document.querySelectorAll('.bar-track').forEach(track => {
       track.addEventListener('mousemove', e => {
         const rect = track.getBoundingClientRect();
         const pct = (e.clientX - rect.left) / rect.width;
+        const leftPctHover = pct * 100;
         const hoverMs = range.min + pct * totalMs;
         const hoverDate = new Date(hoverMs);
         // Find Monday of that week
@@ -1215,9 +1240,19 @@ function render() {
         tip.style.left = (e.clientX + 12) + 'px';
         tip.style.top = (e.clientY - 30) + 'px';
         tip.classList.add('visible');
+        // Show vertical hover line across all rows in this section
+        const sectionId = track.dataset.section;
+        document.querySelectorAll(`.bar-track[data-section="${sectionId}"] .hover-line`).forEach(hl => {
+          hl.style.left = leftPctHover + '%';
+          hl.classList.add('visible');
+        });
       });
       track.addEventListener('mouseleave', () => {
         tip.classList.remove('visible');
+        const sectionId = track.dataset.section;
+        document.querySelectorAll(`.bar-track[data-section="${sectionId}"] .hover-line`).forEach(hl => {
+          hl.classList.remove('visible');
+        });
       });
     });
   }
