@@ -176,11 +176,11 @@
           "start": null,
           "end": null,
           "days": 0,
-          "status": "Complete",
+          "status": "In Progress",
           "priority": "Pre-Open",
           "delayDays": 0,
-          "pctDone": 100,
-          "notes": "DONE"
+          "pctDone": 85,
+          "notes": ""
         },
         {
           "task": "Construct river bridge",
@@ -191,7 +191,7 @@
           "status": "In Progress",
           "priority": "Pre-Open",
           "delayDays": 0,
-          "pctDone": 0,
+          "pctDone": 20,
           "notes": ""
         },
         {
@@ -215,7 +215,7 @@
           "status": "Complete",
           "priority": "Pre-Open",
           "delayDays": 0,
-          "pctDone": 0,
+          "pctDone": 100,
           "notes": ""
         },
         {
@@ -227,7 +227,7 @@
           "status": "Complete",
           "priority": "Pre-Open",
           "delayDays": 0,
-          "pctDone": 0,
+          "pctDone": 100,
           "notes": ""
         },
         {
@@ -813,6 +813,18 @@
           "delayDays": 0,
           "pctDone": 0,
           "notes": ""
+        },
+        {
+          "task": "Willy Tree Net",
+          "team": "Willie",
+          "start": "2026-03-10",
+          "end": "2026-03-11",
+          "days": 1,
+          "status": "Complete",
+          "priority": "Pre-Open",
+          "delayDays": 0,
+          "pctDone": 100,
+          "notes": ""
         }
       ]
     },
@@ -895,11 +907,11 @@
           "start": "2026-03-12",
           "end": "2026-03-13",
           "days": 1,
-          "status": "Pending",
+          "status": "In Progress",
           "priority": "Pre-Open",
           "delayDays": 0,
-          "pctDone": 0,
-          "notes": ""
+          "pctDone": 50,
+          "notes": "HRI is going to give us the easement under the new rule BYU and HRI set up"
         },
         {
           "task": "HRI Nursery area defined",
