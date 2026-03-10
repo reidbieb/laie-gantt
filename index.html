@@ -479,6 +479,7 @@
     width: 100%;
   }
   .add-task-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .add-section-row { padding: 16px 0; text-align: center; display: flex; }
 
   .delete-btn {
     background: none;
@@ -884,6 +885,15 @@ function readEditsFromDOM() {
   DATA.project.lastRefreshed = new Date().toISOString().split('T')[0];
 }
 
+function addSection() {
+  const name = prompt('Enter new section name (e.g. "Operations", "Marketing"):');
+  if (!name || !name.trim()) return;
+  readEditsFromDOM();
+  DATA.sections.push({ name: name.trim(), tasks: [] });
+  markChanged();
+  render();
+}
+
 function addTask(sectionIdx) {
   readEditsFromDOM();
   const today = new Date().toISOString().split('T')[0];
@@ -1220,6 +1230,13 @@ function render() {
       </div>`;
     }
   }).join('');
+
+  // Add Section button (edit mode only)
+  if (EDITING) {
+    sectionsEl.innerHTML += `<div class="add-section-row">
+      <button class="add-task-btn" onclick="addSection()" style="max-width:400px;margin:0 auto;">+ Add Section</button>
+    </div>`;
+  }
 
   document.getElementById('lastUpdated').textContent =
     `Last refreshed: ${DATA.project.lastRefreshed} \u2014 Data loaded at ${new Date().toLocaleTimeString()}`;
