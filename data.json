@@ -378,6 +378,18 @@
           "delayDays": 0,
           "pctDone": 0,
           "notes": ""
+        },
+        {
+          "task": "Bridge Foundation ",
+          "team": "Turley",
+          "start": "2026-03-10",
+          "end": "2026-03-17",
+          "days": 5,
+          "status": "Pending",
+          "priority": "Post-Open",
+          "delayDays": 0,
+          "pctDone": 0,
+          "notes": ""
         }
       ]
     },
