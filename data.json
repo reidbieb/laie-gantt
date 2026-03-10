@@ -3,7 +3,7 @@
     "name": "Laie Project — Opening Readiness Tracker",
     "plannedStart": "2026-03-09",
     "baselineCompletion": "2026-05-13",
-    "lastRefreshed": "2026-03-09"
+    "lastRefreshed": "2026-03-10"
   },
   "sections": [
     {
@@ -15,7 +15,7 @@
           "start": "2026-03-09",
           "end": "2026-03-10",
           "days": 1,
-          "status": "Pending",
+          "status": "In Progress",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
@@ -100,7 +100,7 @@
           "end": "2026-03-13",
           "days": 0.5,
           "status": "Pending",
-          "priority": "Pre-Open",
+          "priority": "Post-Open",
           "delayDays": 0,
           "pctDone": 0,
           "notes": ""
@@ -140,7 +140,7 @@
           "start": "2026-03-11",
           "end": "2026-03-12",
           "days": 1,
-          "status": "Pending",
+          "status": "In Progress",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
@@ -212,7 +212,7 @@
           "start": "2026-03-31",
           "end": "2026-04-02",
           "days": 2,
-          "status": "Pending",
+          "status": "Complete",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
