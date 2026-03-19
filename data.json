@@ -3,7 +3,7 @@
     "name": "Laie Project — Opening Readiness Tracker",
     "plannedStart": "2026-03-09",
     "baselineCompletion": "2026-05-13",
-    "lastRefreshed": "2026-03-12"
+    "lastRefreshed": "2026-03-19"
   },
   "sections": [
     {
@@ -960,10 +960,10 @@
           "start": "2026-03-12",
           "end": "2026-04-06",
           "days": 17,
-          "status": "Pending",
+          "status": "In Progress",
           "priority": "Pre-Open",
           "delayDays": 0,
-          "pctDone": 0,
+          "pctDone": 15,
           "notes": ""
         },
         {
@@ -1032,11 +1032,11 @@
           "start": "2026-04-13",
           "end": "2026-04-14",
           "days": 1,
-          "status": "Pending",
+          "status": "In Progress",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "Kami and Max are preparing to make the move"
         },
         {
           "task": "Ops plans for serving Bananas ",
@@ -1056,7 +1056,7 @@
           "start": "2026-04-01",
           "end": "2026-04-02",
           "days": 1,
-          "status": "Pending",
+          "status": "In Progress",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
@@ -1064,11 +1064,11 @@
         },
         {
           "task": "Cash Drawers, Printers, Scanners, iPads",
-          "team": "Reid",
+          "team": "Kami",
           "start": "2026-03-10",
           "end": "2026-03-11",
           "days": 1,
-          "status": "Pending",
+          "status": "In Progress",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
@@ -1076,15 +1076,15 @@
         },
         {
           "task": "Helmets for Guests?",
-          "team": "Jesse",
+          "team": "Nick T",
           "start": "2026-03-10",
           "end": "2026-03-11",
           "days": 1,
-          "status": "Pending",
+          "status": "In Progress",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "Nick is contacting insurance to check on helmet requirements"
         },
         {
           "task": "Radios or Cell Phones for Communication",
@@ -1092,11 +1092,11 @@
           "start": "2026-03-10",
           "end": "2026-03-11",
           "days": 1,
-          "status": "Pending",
+          "status": "In Progress",
           "priority": "Pre-Open",
           "delayDays": 0,
-          "pctDone": 0,
-          "notes": ""
+          "pctDone": 10,
+          "notes": "Ordered two different sets of test radios"
         },
         {
           "task": "Order all Merch for new Store",
@@ -1104,7 +1104,7 @@
           "start": "2026-03-10",
           "end": "2026-03-11",
           "days": 1,
-          "status": "Pending",
+          "status": "In Progress",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
@@ -1121,7 +1121,7 @@
           "start": "2026-03-16",
           "end": "2026-03-18",
           "days": 2,
-          "status": "Pending",
+          "status": "In Progress",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
@@ -1181,11 +1181,11 @@
           "start": "2026-03-10",
           "end": "2026-03-17",
           "days": 5,
-          "status": "Pending",
+          "status": "In Progress",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "Kami build a list of all Key OTA's. We need to start contracting with them now. "
         },
         {
           "task": "Launch PR Plan",
