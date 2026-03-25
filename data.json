@@ -3,7 +3,7 @@
     "name": "Laie Project — Opening Readiness Tracker",
     "plannedStart": "2026-03-09",
     "baselineCompletion": "2026-05-13",
-    "lastRefreshed": "2026-03-24"
+    "lastRefreshed": "2026-03-25"
   },
   "sections": [
     {
@@ -144,7 +144,7 @@
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 90,
-          "notes": ""
+          "notes": "Little more needs added"
         },
         {
           "task": "Moses - steps down to river",
@@ -156,7 +156,7 @@
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 90,
-          "notes": ""
+          "notes": "Repair the stairs"
         },
         {
           "task": "Add mulch to flume path",
@@ -167,7 +167,7 @@
           "status": "Complete",
           "priority": "Pre-Open",
           "delayDays": 0,
-          "pctDone": 90,
+          "pctDone": 100,
           "notes": ""
         },
         {
