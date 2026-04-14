@@ -338,6 +338,16 @@
     text-shadow: none;
   }
 
+  /* Drag and resize */
+  .bar[data-si] { cursor: grab; }
+  .bar[data-si]:hover { filter: brightness(1.3); }
+  .bar[data-si].dragging { cursor: grabbing; opacity: 0.7; z-index: 10; filter: brightness(1.5); }
+  .bar-resize-handle {
+    position: absolute; right: -2px; top: -2px; bottom: -2px; width: 8px;
+    cursor: ew-resize; z-index: 5; border-radius: 0 3px 3px 0;
+  }
+  .bar-resize-handle:hover, .bar-resize-handle:active { background: rgba(226,171,35,0.5); }
+
   /* Hover crosshair line across section */
   .hover-line {
     position: absolute; top: 0; bottom: 0; width: 1px;
@@ -806,6 +816,9 @@
 let DATA = null;
 let EDITING = false;
 let HAS_CHANGES = false;
+let RENDER_RANGE = null;
+let RENDER_TOTAL_MS = 0;
+let dragState = null;
 const STATUSES = ['Pending','In Progress','Complete','Delayed','Weather Hold'];
 
 function getTeams() {
@@ -1203,6 +1216,8 @@ function render() {
   const range = getTimeRange(allTasks);
   const weeks = getWeeks(range);
   const totalMs = range.max - range.min;
+  RENDER_RANGE = range;
+  RENDER_TOTAL_MS = totalMs;
   const todayMs = today.getTime();
   const todayPct = Math.max(0, Math.min(100, ((todayMs - range.min) / totalMs) * 100));
 
@@ -1278,7 +1293,7 @@ function render() {
   // Gantt sections
   const sectionsEl = document.getElementById('ganttSections');
   sectionsEl.innerHTML = DATA.sections.map((section, si) => {
-    let tasks = section.tasks;
+    let tasks = EDITING ? section.tasks : section.tasks.map((t, idx) => ({...t, _idx: idx}));
     if (!EDITING) {
       if (teamFilter) tasks = tasks.filter(t => t.team === teamFilter);
       if (statusFilter) tasks = tasks.filter(t => t.status === statusFilter);
@@ -1339,11 +1354,13 @@ function render() {
           const leftPct = ((startMs - range.min) / totalMs) * 100;
           const widthPct = Math.max(0.5, ((endMs - startMs) / totalMs) * 100);
           const progressWidth = t.pctDone > 0 && t.pctDone < 100 ? `<div class="bar-progress" style="width:${t.pctDone}%"></div>` : '';
+          const dragAttrs = t._idx !== undefined ? ` data-si="${si}" data-ti="${t._idx}"` : '';
+          const resizeHandle = t._idx !== undefined ? '<div class="bar-resize-handle"></div>' : '';
           if (widthPct < 3.5 && t.days) {
-            barHtml = `<div class="bar ${barClass(t.status)}" style="left:${leftPct}%;width:${widthPct}%">${progressWidth}</div><span class="bar-days bar-days-outside" style="left:${leftPct + widthPct}%">${t.days}d</span>`;
+            barHtml = `<div class="bar ${barClass(t.status)}"${dragAttrs} style="left:${leftPct}%;width:${widthPct}%">${progressWidth}${resizeHandle}</div><span class="bar-days bar-days-outside" style="left:${leftPct + widthPct}%">${t.days}d</span>`;
           } else {
             const daysLabel = t.days ? `<span class="bar-days">${t.days}d</span>` : '';
-            barHtml = `<div class="bar ${barClass(t.status)}" style="left:${leftPct}%;width:${widthPct}%">${progressWidth}${daysLabel}</div>`;
+            barHtml = `<div class="bar ${barClass(t.status)}"${dragAttrs} style="left:${leftPct}%;width:${widthPct}%">${progressWidth}${daysLabel}${resizeHandle}</div>`;
           }
         }
         const pri = t.priority || 'Pre-Open';
@@ -1400,6 +1417,7 @@ function render() {
     const tip = document.getElementById('weekHoverTip');
     document.querySelectorAll('.bar-track').forEach(track => {
       track.addEventListener('mousemove', e => {
+        if (dragState) return;
         const rect = track.getBoundingClientRect();
         const pct = (e.clientX - rect.left) / rect.width;
         const leftPctHover = pct * 100;
@@ -1432,6 +1450,7 @@ function render() {
         });
       });
     });
+    initBarDrag();
   }
 }
 
@@ -1446,6 +1465,102 @@ function toggleSection(i) {
 document.getElementById('teamFilter').addEventListener('change', render);
 document.getElementById('statusFilter').addEventListener('change', render);
 document.getElementById('priorityFilter').addEventListener('change', render);
+
+// ---- Drag and resize bars ----
+
+function initBarDrag() {
+  document.querySelectorAll('.bar[data-si]').forEach(bar => {
+    const handle = bar.querySelector('.bar-resize-handle');
+
+    bar.addEventListener('mousedown', e => {
+      if (e.target.classList.contains('bar-resize-handle')) return;
+      e.preventDefault();
+      const track = bar.closest('.bar-track');
+      const rect = track.getBoundingClientRect();
+      dragState = {
+        type: 'move', bar, track, rect,
+        si: parseInt(bar.dataset.si),
+        ti: parseInt(bar.dataset.ti),
+        startX: e.clientX,
+        origLeft: parseFloat(bar.style.left),
+        origWidth: parseFloat(bar.style.width),
+      };
+      bar.classList.add('dragging');
+      document.getElementById('weekHoverTip').classList.remove('visible');
+    });
+
+    if (handle) {
+      handle.addEventListener('mousedown', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        const track = bar.closest('.bar-track');
+        const rect = track.getBoundingClientRect();
+        dragState = {
+          type: 'resize', bar, track, rect,
+          si: parseInt(bar.dataset.si),
+          ti: parseInt(bar.dataset.ti),
+          startX: e.clientX,
+          origLeft: parseFloat(bar.style.left),
+          origWidth: parseFloat(bar.style.width),
+        };
+        bar.classList.add('dragging');
+        document.getElementById('weekHoverTip').classList.remove('visible');
+      });
+    }
+  });
+}
+
+document.addEventListener('mousemove', e => {
+  if (!dragState) return;
+  const { type, bar, rect, startX, origLeft, origWidth } = dragState;
+  const dxPct = ((e.clientX - startX) / rect.width) * 100;
+  if (type === 'move') {
+    const newLeft = Math.max(0, origLeft + dxPct);
+    bar.style.left = newLeft + '%';
+    const outsideLabel = bar.parentElement.querySelector('.bar-days-outside');
+    if (outsideLabel) outsideLabel.style.left = (newLeft + origWidth) + '%';
+  } else {
+    bar.style.width = Math.max(0.5, origWidth + dxPct) + '%';
+  }
+});
+
+document.addEventListener('mouseup', e => {
+  if (!dragState) return;
+  const { type, bar, si, ti, rect, origLeft, origWidth, startX } = dragState;
+  bar.classList.remove('dragging');
+
+  const dxPct = ((e.clientX - startX) / rect.width) * 100;
+  if (Math.abs(dxPct) < 0.3) { dragState = null; return; }
+
+  const task = DATA.sections[si].tasks[ti];
+  const startMs = new Date(task.start + 'T00:00:00').getTime();
+  const endMs = new Date(task.end + 'T00:00:00').getTime();
+  const durationMs = endMs - startMs;
+
+  if (type === 'move') {
+    const newLeftPct = Math.max(0, origLeft + dxPct);
+    const newStartMs = RENDER_RANGE.min + (newLeftPct / 100) * RENDER_TOTAL_MS;
+    const newStart = new Date(newStartMs);
+    newStart.setHours(12, 0, 0, 0);
+    const newEnd = new Date(newStart.getTime() + durationMs);
+    task.start = newStart.toISOString().split('T')[0];
+    task.end = newEnd.toISOString().split('T')[0];
+  } else {
+    const newRightPct = origLeft + Math.max(0.5, origWidth + dxPct);
+    const newEndMs = RENDER_RANGE.min + (newRightPct / 100) * RENDER_TOTAL_MS;
+    const newEnd = new Date(newEndMs);
+    newEnd.setHours(12, 0, 0, 0);
+    task.end = newEnd.toISOString().split('T')[0];
+    const calDays = Math.round((newEnd.getTime() - startMs) / (24 * 60 * 60 * 1000));
+    task.days = Math.max(0.5, Math.round(calDays * 5 / 7 * 2) / 2);
+  }
+
+  markChanged();
+  dragState = null;
+  const scrollY = window.scrollY;
+  render();
+  window.scrollTo(0, scrollY);
+});
 
 loadData();
 </script>
