@@ -1075,7 +1075,7 @@ function saveSettings() {
 }
 
 async function saveChanges() {
-  readEditsFromDOM();
+  if (EDITING) readEditsFromDOM();
   const config = getGitHubConfig();
   if (!config) { openSettings(); return; }
 
