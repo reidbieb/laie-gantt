@@ -3,7 +3,7 @@
     "name": "Laie Project — Opening Readiness Tracker",
     "plannedStart": "2026-03-09",
     "baselineCompletion": "2026-05-13",
-    "lastRefreshed": "2026-04-23"
+    "lastRefreshed": "2026-04-29"
   },
   "sections": [
     {
@@ -116,6 +116,30 @@
           "delayDays": 0,
           "pctDone": 0,
           "notes": ""
+        },
+        {
+          "task": "Remove Fence / Add Private Gate",
+          "team": "CWBC Crew 1",
+          "start": "2026-04-29",
+          "end": "2026-05-01",
+          "days": 2,
+          "status": "Pending",
+          "priority": "Pre-Open",
+          "delayDays": 0,
+          "pctDone": 0,
+          "notes": ""
+        },
+        {
+          "task": "Add automatic gate to Nursery Exit",
+          "team": "Aaron",
+          "start": "2026-04-29",
+          "end": "2026-05-01",
+          "days": 2,
+          "status": "Pending",
+          "priority": "Pre-Open",
+          "delayDays": 0,
+          "pctDone": 0,
+          "notes": ""
         }
       ]
     },
@@ -128,7 +152,7 @@
           "start": "2026-04-21",
           "end": "2026-04-22",
           "days": 1,
-          "status": "Pending",
+          "status": "Complete",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
@@ -156,7 +180,7 @@
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 90,
-          "notes": "Repair the stairs"
+          "notes": "Repair the stairs and stain the grout"
         },
         {
           "task": "Add mulch to flume path",
@@ -252,7 +276,7 @@
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "Down the center of the stairs. "
         },
         {
           "task": "Plant Citronella plants",
@@ -263,7 +287,7 @@
           "status": "Complete",
           "priority": "Pre-Open",
           "delayDays": 0,
-          "pctDone": 0,
+          "pctDone": 100,
           "notes": ""
         },
         {
@@ -313,7 +337,7 @@
           "start": "2026-05-11",
           "end": "2026-05-12",
           "days": 1,
-          "status": "Pending",
+          "status": "Complete",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
@@ -361,7 +385,7 @@
           "start": "2026-05-13",
           "end": "2026-05-14",
           "days": 1,
-          "status": "Pending",
+          "status": "Complete",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
@@ -390,7 +414,7 @@
           "start": "2026-05-14",
           "end": "2026-05-15",
           "days": 1,
-          "status": "Pending",
+          "status": "Complete",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
@@ -450,7 +474,7 @@
           "start": "2026-04-23",
           "end": "2026-04-24",
           "days": 1,
-          "status": "In Progress",
+          "status": "Complete",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 85,
@@ -484,13 +508,13 @@
           "task": "Add railing - high/exposed areas",
           "team": "CWBC Crew 1",
           "start": "2026-05-20",
-          "end": "2026-05-21",
-          "days": 1,
+          "end": "2026-05-25",
+          "days": 3,
           "status": "In Progress",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 50,
-          "notes": ""
+          "notes": "We need more beefy railing around the cliff and scrabble hike"
         },
         {
           "task": "Improve scrabble hike - railings",
@@ -515,6 +539,18 @@
           "delayDays": 0,
           "pctDone": 0,
           "notes": ""
+        },
+        {
+          "task": "Improve the ground around the entrance and exit of tree nets",
+          "team": "Aaron",
+          "start": "2026-04-29",
+          "end": "2026-05-01",
+          "days": 2,
+          "status": "Pending",
+          "priority": "Pre-Open",
+          "delayDays": 0,
+          "pctDone": 0,
+          "notes": "Dig out the ground a little and add chips where the guests step out"
         }
       ]
     },
@@ -525,8 +561,8 @@
           "task": "Chip downed wood",
           "team": "CWBC Crew 2",
           "start": "2026-04-14",
-          "end": "2026-04-21",
-          "days": 5,
+          "end": "2026-04-28",
+          "days": 10,
           "status": "Pending",
           "priority": "Pre-Open",
           "delayDays": 0,
@@ -563,7 +599,7 @@
           "start": "2026-04-23",
           "end": "2026-04-27",
           "days": 2,
-          "status": "Pending",
+          "status": "Complete",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
@@ -611,7 +647,7 @@
           "start": "2026-04-30",
           "end": "2026-05-01",
           "days": 0.5,
-          "status": "Pending",
+          "status": "Complete",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
@@ -654,11 +690,11 @@
           "notes": ""
         },
         {
-          "task": "Remove iron wood tree",
+          "task": "Remove iron wood tree in the fire area",
           "team": "CWBC Crew 2",
           "start": "2026-05-05",
-          "end": "2026-05-06",
-          "days": 0.5,
+          "end": "2026-05-08",
+          "days": 3,
           "status": "Pending",
           "priority": "Pre-Open",
           "delayDays": 0,
@@ -683,7 +719,7 @@
           "start": "2026-04-14",
           "end": "2026-04-15",
           "days": 1,
-          "status": "Pending",
+          "status": "Complete",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
@@ -711,7 +747,7 @@
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
-          "notes": ""
+          "notes": "Mellow out the steep slopes with steps and wood chips"
         },
         {
           "task": "Define lower parking lot",
@@ -731,7 +767,7 @@
           "start": "2026-05-18",
           "end": "2026-05-19",
           "days": 1,
-          "status": "Pending",
+          "status": "Complete",
           "priority": "Pre-Open",
           "delayDays": 0,
           "pctDone": 0,
